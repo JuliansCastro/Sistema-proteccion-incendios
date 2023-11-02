@@ -31,14 +31,14 @@ Utilizando Arduino UNO como programador de ATtiny84/44 y el IDE de Arduino.
 https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json
 ```
 
-![URLs Gestor de Tarjetas](imgs/URL_gestor_tarjetas.png "URLs Gestor de Tarjetas")
+![URLs Gestor de Tarjetas](https://github.com/JuliansCastro/Sistema-proteccion-incendios/blob/master/imgs/URL_gestor_tarjetas.png?raw=true "URLs Gestor de Tarjetas")
 
 En el menu de ***Herramientas > Placa*** seleccionar ***Gestor  de Tarjetas..*** buscar ***ATTiny*** e instalar el paquete ***ATTiny by David A. Mellis[[1]](#1-programación-de-attiny84-42bots)***
 
-![Instalar ATTiny](imgs/Gestor_Tarjetas_Attyny_David.png "Instalar ATTiny")
+![Instalar ATTiny](https://github.com/JuliansCastro/Sistema-proteccion-incendios/blob/master/imgs/Gestor_Tarjetas_Attyny_David.png?raw=true "Instalar ATTiny")
 
 
-2. **Configurar el Arduino Uno para que actúe como programador de ATTiny**
+1. **Configurar el Arduino Uno para que actúe como programador de ATTiny**
 
 
 - Abra el boceto de ArduinoISP desde los Ejemplos ("Archivo" ->"Ejemplos" -> "Arduino ISP").
@@ -108,7 +108,7 @@ Este paso es opcional. De forma predeterminada, los chips Attiny funcionan a 1 M
 
 Para hacerlo, debe usar el mismo cableado que usó para cargar el sketch de ***Blink*** en el paso anterior. En el menú *"Herramientas" > "Placa"*, esta vez seleccione la opción "ATtiny84 (reloj interno de 8 Mhz)", o "ATtiny44 (reloj interno de 8 Mhz)", dependiendo del chip que tenga. Es importante elegir la velocidad de reloj correcta en el menú. Elegir la opción de reloj externo de 20 Mhz, requerirá que agregue un cable en un cristal de 20 MHz, o resonador, para programar y usar su ATTiny84/44.
 
-![Blink 8Mhz](imgs/blink_8Mhz.png "Sketch Blink 8Mhz")
+![Blink 8Mhz](https://github.com/JuliansCastro/Sistema-proteccion-incendios/blob/master/imgs/blink_8Mhz.png?raw=true "Sketch Blink 8Mhz")
 
 A continuación, de nuevo en el menú ***"Herramientas"***, elija la opción ***"Quemar bootloader"***. En realidad, no hay bootloader en los chips Attiny, pero este paso establecerá los fusibles en los valores que le permitirán funcionar a 8 Mhz
 
@@ -194,13 +194,13 @@ void loop() {
 }
 ```
 
-![Monitor Serie](imgs/BareMinimum.png "Bare minimun > Monitor Serie")
+![Monitor Serie](https://github.com/JuliansCastro/Sistema-proteccion-incendios/blob/master/imgs/BareMinimum.png?raw=true "Bare minimun > Monitor Serie")
 
 
-4. Conectar los cables de comunicación del el Attiny84/44 ***Rx:2 y Tx: 3 (Pines Arduino D10, D9)*** al Arduino Uno seleccionando los pines del Attiny84/44  para la comunicación serial. En el *Monitor Serie* se debe ver los datos transmitidos en la comunicación del Attiny84/44 al Arduino Uno:
+5. Conectar los cables de comunicación del el Attiny84/44 ***Rx:2 y Tx: 3 (Pines Arduino D10, D9)*** al Arduino Uno seleccionando los pines del Attiny84/44  para la comunicación serial. En el *Monitor Serie* se debe ver los datos transmitidos en la comunicación del Attiny84/44 al Arduino Uno:
 
 ![CommSerialAttny_ArduinoUno]()
-![MonitorSerieAttny](imgs/MonitorSerieAttiny84.png "Monitor Serie Attiny84")
+![MonitorSerieAttny](https://github.com/JuliansCastro/Sistema-proteccion-incendios/blob/master/imgs/MonitorSerieAttiny84.png?raw=true "Monitor Serie Attiny84")
 
 ## COMUNICACIÓN LoRa CON ATTINY84/44
 
