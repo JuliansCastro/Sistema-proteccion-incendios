@@ -221,6 +221,37 @@ Basado en la modificación de la libreria de LoRa por ***[Geeky Electronics Proj
 ```
 
 
+
+## COMUNICACIÓN LoRa CON RPi Pico
+
+### Configuración del IDE Arduino para RPi Pico
+
+![Raspberry Pi pico - Pinout](https://www.okdo.com/wp-content/uploads/2021/04/Rasbnerry-Pi-Pico-Pinout-1.jpg?resize=2093%2C1667 "Raspberry Pi pico - Pinout")
+
+
+
+1. Instalar paquete de RPi Pico en el IDE de Arduino[[6]](#6-pico-w-with-the-arduino-ide-raspberry-pi-pico-w-and-adafruit-io-with-arduino-ide):
+
+   En el menu de ***Archivo > Preferencias > Gestor de URLs Adicionales de Tarjetas*** agregar el link:
+
+```
+https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+```
+### Comunicación LoRa con RPi Pico [[7]](#7-raspberry-pi-pico-w-with-lora-sx1278-for-sensor-monitoring-electronic-clinic)
+
+![Raspberry Pi pico - LoRa Rx](https://www.electroniclinic.com/wp-content/uploads/2023/01/raspberry-pi-pico-w-with-i2c-16x2-lcd-receiver-1280x656.jpg "Raspberry Pi pico - LoRa Rx")
+
+```arduino
+```
+
+### Webserver con RPi Pico
+
+
+
+
+
+</br></br></br></br>
+
 ## REFERENCIAS:
 
 ##### [1] Programación de ATtiny84 [(42bots)](https://42bots.com/tutorials/programming-attiny-ics-with-arduino-uno-and-the-arduino-ide-1-6-4-or-above/) 
@@ -233,3 +264,9 @@ Basado en la modificación de la libreria de LoRa por ***[Geeky Electronics Proj
 
 
 ##### [5] Interfacing SX1278 (Ra-02) LORA Module with Arduino [(HowToElectronics)](https://how2electronics.com/interfacing-sx1278-lora-module-with-arduino/)
+
+##### [6] Pico W with the Arduino IDE [(Raspberry Pi Pico W and Adafruit IO with Arduino IDE)](https://www.electroniclinic.com/raspberry-pi-pico-w-and-adafruit-io-with-arduino-ide/)
+
+##### [7] Raspberry Pi Pico W with LoRa SX1278 for Sensor Monitoring [(Electronic Clinic)](https://www.electroniclinic.com/raspberry-pi-pico-w-with-lora-sx1278-for-sensor-monitoring/)
+
+##### [8] Webserver with Pico W on the Arduino IDE [(DroneBot Workshop)](https://dronebotworkshop.com/picow-arduino/)
