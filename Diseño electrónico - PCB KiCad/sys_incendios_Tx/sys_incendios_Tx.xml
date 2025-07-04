@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>D:\Mi unidad\UNAL\ELECTRONICA\X\Diseño S. E\Proyecto\Esquematico_sys_incendios\sys_incendios_Tx\sys_incendios_Tx.kicad_sch</source>
+    <date>15/11/2023 3:37:43 a. m.</date>
+    <tool>Eeschema 7.0.9</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Sensores Tx</title>
+        <company>UNAL - Diseño S.E</company>
+        <rev>1.0</rev>
+        <date>2023-11-14</date>
+        <source>sys_incendios_Tx.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>Pico</value>
+      <footprint>MCU_RaspberryPi_and_Boards:RPi_Pico_SMD_TH</footprint>
+      <datasheet>D:\Mi unidad\UNAL\ELECTRONICA\X\Diseño S. E\Proyecto\Esquematico_sys_incendios\Datasheets\Pico-R3-A4-Pinout.pdf</datasheet>
+      <libsource lib="MCU_RaspberryPi_and_Boards" part="Pico" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="sys_incendios_Tx.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>722a8a80-a681-4506-b0c4-10be61dbb830</tstamps>
+    </comp>
+    <comp ref="U3">
+      <value>DHT11</value>
+      <footprint>Sensor:Aosong_DHT11_5.5x12.0_P2.54mm</footprint>
+      <datasheet>http://akizukidenshi.com/download/ds/aosong/DHT11.pdf</datasheet>
+      <libsource lib="Sensor" part="DHT11" description="3.3V to 5.5V, temperature and humidity module, DHT11"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="sys_incendios_Tx.kicad_sch"/>
+      <property name="ki_description" value="3.3V to 5.5V, temperature and humidity module, DHT11"/>
+      <property name="ki_keywords" value="digital sensor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9a77d295-0095-4a86-bf4b-6011352714e4</tstamps>
+    </comp>
+    <comp ref="U4">
+      <value>RA-02_LORA_mod_V4.0</value>
+      <footprint>Connector_PinHeader_1.27mm:PinHeader_2x04_P1.27mm_Vertical</footprint>
+      <fields>
+        <field name="Availability">Not in stock</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/Ra-02%20LoRa/AI-Thinker/view-part/?ref=eda</field>
+        <field name="Description">
+Ra-02 LoRa RF M5Stack Platform Evaluation Expansion Board
+</field>
+        <field name="MANUFACTURER">Ai-Thinker</field>
+        <field name="MAXIMUM_PACKAGE_HEIGHT">3.3mm</field>
+        <field name="MF">AI-Thinker</field>
+        <field name="MP">Ra-02 LoRa</field>
+        <field name="PARTREV">2018/03/02</field>
+        <field name="Package">None</field>
+        <field name="Price">None</field>
+        <field name="STANDARD">Manufacturer Recommendations</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/Ra-02%20LoRa/AI-Thinker/view-part/?ref=snap</field>
+      </fields>
+      <libsource lib="RA-02_LORA_module_V4.0" part="RA-02_LORA_mod_V4.0" description=""/>
+      <property name="MF" value="AI-Thinker"/>
+      <property name="MAXIMUM_PACKAGE_HEIGHT" value="3.3mm"/>
+      <property name="Package" value="None"/>
+      <property name="Price" value="None"/>
+      <property name="Check_prices" value="https://www.snapeda.com/parts/Ra-02%20LoRa/AI-Thinker/view-part/?ref=eda"/>
+      <property name="STANDARD" value="Manufacturer Recommendations"/>
+      <property name="PARTREV" value="2018/03/02"/>
+      <property name="SnapEDA_Link" value="https://www.snapeda.com/parts/Ra-02%20LoRa/AI-Thinker/view-part/?ref=snap"/>
+      <property name="MP" value="Ra-02 LoRa"/>
+      <property name="Description" value="&#xA;Ra-02 LoRa RF M5Stack Platform Evaluation Expansion Board&#xA;"/>
+      <property name="Availability" value="Not in stock"/>
+      <property name="MANUFACTURER" value="Ai-Thinker"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="sys_incendios_Tx.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b181518d-8075-4aee-8ecf-c1f5349f85d2</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="MCU_RaspberryPi_and_Boards" part="Pico">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Pico</field>
+        <field name="Footprint">RPi_Pico:RPi_Pico_SMD_TH</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GPIO0" type="bidirectional"/>
+        <pin num="2" name="GPIO1" type="bidirectional"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="GPIO2" type="bidirectional"/>
+        <pin num="5" name="GPIO3" type="bidirectional"/>
+        <pin num="6" name="GPIO4" type="bidirectional"/>
+        <pin num="7" name="GPIO5" type="bidirectional"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="GPIO6" type="bidirectional"/>
+        <pin num="10" name="GPIO7" type="bidirectional"/>
+        <pin num="11" name="GPIO8" type="bidirectional"/>
+        <pin num="12" name="GPIO9" type="bidirectional"/>
+        <pin num="13" name="GND" type="power_in"/>
+        <pin num="14" name="GPIO10" type="bidirectional"/>
+        <pin num="15" name="GPIO11" type="bidirectional"/>
+        <pin num="16" name="GPIO12" type="bidirectional"/>
+        <pin num="17" name="GPIO13" type="bidirectional"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="GPIO14" type="bidirectional"/>
+        <pin num="20" name="GPIO15" type="bidirectional"/>
+        <pin num="21" name="GPIO16" type="bidirectional"/>
+        <pin num="22" name="GPIO17" type="bidirectional"/>
+        <pin num="23" name="GND" type="power_in"/>
+        <pin num="24" name="GPIO18" type="bidirectional"/>
+        <pin num="25" name="GPIO19" type="bidirectional"/>
+        <pin num="26" name="GPIO20" type="bidirectional"/>
+        <pin num="27" name="GPIO21" type="bidirectional"/>
+        <pin num="28" name="GND" type="power_in"/>
+        <pin num="29" name="GPIO22" type="bidirectional"/>
+        <pin num="30" name="RUN" type="input"/>
+        <pin num="31" name="GPIO26_ADC0" type="bidirectional"/>
+        <pin num="32" name="GPIO27_ADC1" type="bidirectional"/>
+        <pin num="33" name="AGND" type="power_in"/>
+        <pin num="34" name="GPIO28_ADC2" type="bidirectional"/>
+        <pin num="35" name="ADC_VREF" type="power_in"/>
+        <pin num="36" name="3V3" type="power_in"/>
+        <pin num="37" name="3V3_EN" type="input"/>
+        <pin num="38" name="GND" type="bidirectional"/>
+        <pin num="39" name="VSYS" type="power_in"/>
+        <pin num="40" name="VBUS" type="power_in"/>
+        <pin num="41" name="SWCLK" type="input"/>
+        <pin num="42" name="GND" type="power_in"/>
+        <pin num="43" name="SWDIO" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="RA-02_LORA_module_V4.0" part="RA-02_LORA_mod_V4.0">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">RA-02_LORA_mod_V4.0</field>
+        <field name="Footprint">Connector_PinHeader_1.27mm:PinHeader_2x04_P1.27mm_Vertical</field>
+        <field name="MF">AI-Thinker</field>
+        <field name="MAXIMUM_PACKAGE_HEIGHT">3.3mm</field>
+        <field name="Package">None</field>
+        <field name="Price">None</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/Ra-02%20LoRa/AI-Thinker/view-part/?ref=eda</field>
+        <field name="STANDARD">Manufacturer Recommendations</field>
+        <field name="PARTREV">2018/03/02</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/Ra-02%20LoRa/AI-Thinker/view-part/?ref=snap</field>
+        <field name="MP">Ra-02 LoRa</field>
+        <field name="Description">
+Ra-02 LoRa RF M5Stack Platform Evaluation Expansion Board
+</field>
+        <field name="Availability">Not in stock</field>
+        <field name="MANUFACTURER">Ai-Thinker</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="3.3V" type="power_in"/>
+        <pin num="3" name="RST" type="input"/>
+        <pin num="4" name="NSS" type="input"/>
+        <pin num="5" name="SCK" type="input"/>
+        <pin num="6" name="MOSI" type="input"/>
+        <pin num="7" name="MISO" type="output"/>
+        <pin num="8" name="DIO0" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="Sensor" part="DHT11">
+      <description>3.3V to 5.5V, temperature and humidity module, DHT11</description>
+      <docs>http://akizukidenshi.com/download/ds/aosong/DHT11.pdf</docs>
+      <footprints>
+        <fp>Aosong*DHT11*5.5x12.0*P2.54mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">DHT11</field>
+        <field name="Footprint">Sensor:Aosong_DHT11_5.5x12.0_P2.54mm</field>
+        <field name="Datasheet">http://akizukidenshi.com/download/ds/aosong/DHT11.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="DATA" type="bidirectional"/>
+        <pin num="3" name="NC" type="no_connect"/>
+        <pin num="4" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="MCU_RaspberryPi_and_Boards">
+      <uri>D:/Mi unidad/UNAL/ELECTRONICA/X/Diseño S. E/Proyecto/Esquematico_sys_incendios/KiCad_Libraries/RP-Pico_library/MCU_RaspberryPi_and_Boards.kicad_sym</uri>
+    </library>
+    <library logical="RA-02_LORA_module_V4.0">
+      <uri>D:/Mi unidad/UNAL/ELECTRONICA/X/Diseño S. E/Proyecto/Esquematico_sys_incendios/KiCad_Libraries/RA-02_LORA_library/RA-02_LORA_module_V4.0.kicad_sym</uri>
+    </library>
+    <library logical="Sensor">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Sensor.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(U1-3V3)">
+      <node ref="U1" pin="36" pinfunction="3V3" pintype="power_in"/>
+      <node ref="U3" pin="1" pinfunction="VDD" pintype="power_in"/>
+      <node ref="U4" pin="2" pinfunction="3.3V" pintype="power_in"/>
+    </net>
+    <net code="2" name="Net-(U1-GPIO8)">
+      <node ref="U1" pin="11" pinfunction="GPIO8" pintype="bidirectional"/>
+      <node ref="U4" pin="4" pinfunction="NSS" pintype="input"/>
+    </net>
+    <net code="3" name="Net-(U1-GPIO16)">
+      <node ref="U1" pin="21" pinfunction="GPIO16" pintype="bidirectional"/>
+      <node ref="U4" pin="7" pinfunction="MISO" pintype="output"/>
+    </net>
+    <net code="4" name="Net-(U1-GPIO18)">
+      <node ref="U1" pin="24" pinfunction="GPIO18" pintype="bidirectional"/>
+      <node ref="U4" pin="5" pinfunction="SCK" pintype="input"/>
+    </net>
+    <net code="5" name="Net-(U1-GPIO19)">
+      <node ref="U1" pin="25" pinfunction="GPIO19" pintype="bidirectional"/>
+      <node ref="U4" pin="6" pinfunction="MOSI" pintype="input"/>
+    </net>
+    <net code="6" name="Net-(U1-GPIO28_ADC2)">
+      <node ref="U1" pin="34" pinfunction="GPIO28_ADC2" pintype="bidirectional"/>
+      <node ref="U3" pin="2" pinfunction="DATA" pintype="bidirectional"/>
+    </net>
+    <net code="7" name="Net-(U3-GND)">
+      <node ref="U1" pin="38" pinfunction="GND" pintype="bidirectional"/>
+      <node ref="U3" pin="4" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="8" name="Net-(U4-GND)">
+      <node ref="U1" pin="28" pinfunction="GND" pintype="power_in"/>
+      <node ref="U4" pin="1" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="9" name="unconnected-(U1-3V3_EN-Pad37)">
+      <node ref="U1" pin="37" pinfunction="3V3_EN" pintype="input"/>
+    </net>
+    <net code="10" name="unconnected-(U1-ADC_VREF-Pad35)">
+      <node ref="U1" pin="35" pinfunction="ADC_VREF" pintype="power_in"/>
+    </net>
+    <net code="11" name="unconnected-(U1-AGND-Pad33)">
+      <node ref="U1" pin="33" pinfunction="AGND" pintype="power_in"/>
+    </net>
+    <net code="12" name="unconnected-(U1-GND-Pad3)">
+      <node ref="U1" pin="3" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="13" name="unconnected-(U1-GND-Pad8)">
+      <node ref="U1" pin="8" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="14" name="unconnected-(U1-GND-Pad13)">
+      <node ref="U1" pin="13" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="15" name="unconnected-(U1-GND-Pad18)">
+      <node ref="U1" pin="18" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="16" name="unconnected-(U1-GND-Pad23)">
+      <node ref="U1" pin="23" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="17" name="unconnected-(U1-GND-Pad42)">
+      <node ref="U1" pin="42" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="18" name="unconnected-(U1-GPIO0-Pad1)">
+      <node ref="U1" pin="1" pinfunction="GPIO0" pintype="bidirectional"/>
+    </net>
+    <net code="19" name="unconnected-(U1-GPIO1-Pad2)">
+      <node ref="U1" pin="2" pinfunction="GPIO1" pintype="bidirectional"/>
+    </net>
+    <net code="20" name="unconnected-(U1-GPIO2-Pad4)">
+      <node ref="U1" pin="4" pinfunction="GPIO2" pintype="bidirectional"/>
+    </net>
+    <net code="21" name="unconnected-(U1-GPIO3-Pad5)">
+      <node ref="U1" pin="5" pinfunction="GPIO3" pintype="bidirectional"/>
+    </net>
+    <net code="22" name="unconnected-(U1-GPIO4-Pad6)">
+      <node ref="U1" pin="6" pinfunction="GPIO4" pintype="bidirectional"/>
+    </net>
+    <net code="23" name="unconnected-(U1-GPIO5-Pad7)">
+      <node ref="U1" pin="7" pinfunction="GPIO5" pintype="bidirectional"/>
+    </net>
+    <net code="24" name="unconnected-(U1-GPIO6-Pad9)">
+      <node ref="U1" pin="9" pinfunction="GPIO6" pintype="bidirectional"/>
+    </net>
+    <net code="25" name="unconnected-(U1-GPIO7-Pad10)">
+      <node ref="U1" pin="10" pinfunction="GPIO7" pintype="bidirectional"/>
+    </net>
+    <net code="26" name="unconnected-(U1-GPIO9-Pad12)">
+      <node ref="U1" pin="12" pinfunction="GPIO9" pintype="bidirectional"/>
+    </net>
+    <net code="27" name="unconnected-(U1-GPIO10-Pad14)">
+      <node ref="U1" pin="14" pinfunction="GPIO10" pintype="bidirectional"/>
+    </net>
+    <net code="28" name="unconnected-(U1-GPIO11-Pad15)">
+      <node ref="U1" pin="15" pinfunction="GPIO11" pintype="bidirectional"/>
+    </net>
+    <net code="29" name="unconnected-(U1-GPIO12-Pad16)">
+      <node ref="U1" pin="16" pinfunction="GPIO12" pintype="bidirectional"/>
+    </net>
+    <net code="30" name="unconnected-(U1-GPIO13-Pad17)">
+      <node ref="U1" pin="17" pinfunction="GPIO13" pintype="bidirectional"/>
+    </net>
+    <net code="31" name="unconnected-(U1-GPIO14-Pad19)">
+      <node ref="U1" pin="19" pinfunction="GPIO14" pintype="bidirectional"/>
+    </net>
+    <net code="32" name="unconnected-(U1-GPIO15-Pad20)">
+      <node ref="U1" pin="20" pinfunction="GPIO15" pintype="bidirectional"/>
+    </net>
+    <net code="33" name="unconnected-(U1-GPIO17-Pad22)">
+      <node ref="U1" pin="22" pinfunction="GPIO17" pintype="bidirectional"/>
+    </net>
+    <net code="34" name="unconnected-(U1-GPIO20-Pad26)">
+      <node ref="U1" pin="26" pinfunction="GPIO20" pintype="bidirectional"/>
+    </net>
+    <net code="35" name="unconnected-(U1-GPIO21-Pad27)">
+      <node ref="U1" pin="27" pinfunction="GPIO21" pintype="bidirectional"/>
+    </net>
+    <net code="36" name="unconnected-(U1-GPIO22-Pad29)">
+      <node ref="U1" pin="29" pinfunction="GPIO22" pintype="bidirectional"/>
+    </net>
+    <net code="37" name="unconnected-(U1-GPIO26_ADC0-Pad31)">
+      <node ref="U1" pin="31" pinfunction="GPIO26_ADC0" pintype="bidirectional"/>
+    </net>
+    <net code="38" name="unconnected-(U1-GPIO27_ADC1-Pad32)">
+      <node ref="U1" pin="32" pinfunction="GPIO27_ADC1" pintype="bidirectional"/>
+    </net>
+    <net code="39" name="unconnected-(U1-RUN-Pad30)">
+      <node ref="U1" pin="30" pinfunction="RUN" pintype="input"/>
+    </net>
+    <net code="40" name="unconnected-(U1-SWCLK-Pad41)">
+      <node ref="U1" pin="41" pinfunction="SWCLK" pintype="input"/>
+    </net>
+    <net code="41" name="unconnected-(U1-SWDIO-Pad43)">
+      <node ref="U1" pin="43" pinfunction="SWDIO" pintype="bidirectional"/>
+    </net>
+    <net code="42" name="unconnected-(U1-VBUS-Pad40)">
+      <node ref="U1" pin="40" pinfunction="VBUS" pintype="power_in"/>
+    </net>
+    <net code="43" name="unconnected-(U1-VSYS-Pad39)">
+      <node ref="U1" pin="39" pinfunction="VSYS" pintype="power_in"/>
+    </net>
+    <net code="44" name="unconnected-(U3-NC-Pad3)">
+      <node ref="U3" pin="3" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="45" name="unconnected-(U4-DIO0-Pad8)">
+      <node ref="U4" pin="8" pinfunction="DIO0" pintype="bidirectional"/>
+    </net>
+    <net code="46" name="unconnected-(U4-RST-Pad3)">
+      <node ref="U4" pin="3" pinfunction="RST" pintype="input"/>
+    </net>
+  </nets>
+</export>

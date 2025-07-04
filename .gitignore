@@ -1,0 +1,8 @@
+# Ignore build artifacts
+README.pdf
+
+# Ignore executable files
+*.exe
+
+# Ignore binary flashing files
+*.uf2

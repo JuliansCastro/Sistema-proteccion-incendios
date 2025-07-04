@@ -1,0 +1,6 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "MCU_RaspberryPi_and_Boards")(type "KiCad")(uri "C:/Users/dvama/OneDrive - Universidad Nacional de Colombia/Documentos/UNAL/2023-2/Diseno/RP-Pico_library/MCU_RaspberryPi_and_Boards.kicad_sym")(options "")(descr ""))
+  (lib (name "RA-02_LORA")(type "KiCad")(uri "C:/Users/dvama/OneDrive - Universidad Nacional de Colombia/Documentos/UNAL/2023-2/Diseno/RA-02_LORA_library/RA-02_LORA.kicad_sym")(options "")(descr ""))
+  (lib (name "RA-02_LORA_module_V4.0")(type "KiCad")(uri "C:/Users/dvama/OneDrive - Universidad Nacional de Colombia/Documentos/UNAL/2023-2/Diseno/RA-02_LORA_library/RA-02_LORA_module_V4.0.kicad_sym")(options "")(descr ""))
+)

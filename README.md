@@ -1,272 +1,320 @@
-# SISTEMA DE PROTECCIÓN CONTRA INCENDIOS
+# Sistema de Protección contra Incendios con LoRa y Raspberry Pi Pico
 
+## Resumen
 
-### Integrantes:
+Este proyecto desarrolla un sistema integral de monitoreo y protección contra incendios forestales utilizando tecnología IoT. El sistema emplea sensores distribuidos que se comunican mediante protocolo LoRa para detectar condiciones ambientales críticas (temperatura, humedad y presencia de llamas) y transmitir los datos a una estación central basada en Raspberry Pi Pico W que proporciona interfaz web para visualización en tiempo real.
 
-- Julian Andres Castro Pardo     <span style="padding-left:62px;"></span> (juacastropa@unal.edu.co)
-- Daniela Valentina Amaya Vargas <span style="padding-left:30px;"></span> (dvamayav@unal.edu.co)
-- Javier Leonardo Rodriguez <span style="padding-left:64px;"></span> (@unal.edu.co)
-- Sebastian <span style="padding-left:64px;"></span> (@unal.edu.co)
+## Características Principales
 
+- **Monitoreo Distribuido**: Red de sensores inalámbricos con comunicación LoRa de largo alcance
+- **Detección Multiparamétrica**: Sensores de temperatura (DHT11), humedad relativa y detector PIR para llamas
+- **Comunicación Robusta**: Protocolo LoRa a 433MHz con alcance de varios kilómetros
+- **Interfaz Web**: Servidor HTTP integrado en Raspberry Pi Pico W para visualización remota
+- **Display Local**: Pantalla LCD I2C para monitoreo local de datos
+- **Alertas en Tiempo Real**: Detección automática de condiciones de riesgo de incendio
+- **Arquitectura Modular**: Diseño escalable para múltiples nodos sensores
+- **Bajo Consumo**: Optimizado para aplicaciones de campo con alimentación autónoma
 
+## Arquitectura del Sistema
 
-## Descripción del proyecto:
-
-
-
-
-## PROGRAMACIÓN DE ATTINY84/44 CON ARDUINO UNO
-
-Utilizando Arduino UNO como programador de ATtiny84/44 y el IDE de Arduino.
-
-### Programar ATtiny con el IDE de Arduino
-
-![ATTiny84 Distribución de pines ATTiny44](https://42bots.com/wp-content/uploads/2014/01/ATTiny84-ATTiny44-pinout.png "ATTiny84 Distribución de pines ATTiny44")
-
-1. **Configurar el software IDE de Arduino[[1]](#1-programación-de-attiny84-42bots)**
-   
-   En el menu de ***Archivo > Preferencias > Gestor de URLs Adicionales de Tarjetas*** agregar el link:
-
-```
-https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json
-```
-
-![URLs Gestor de Tarjetas](https://github.com/JuliansCastro/Sistema-proteccion-incendios/blob/master/imgs/URL_gestor_tarjetas.png?raw=true "URLs Gestor de Tarjetas")
-
-En el menu de ***Herramientas > Placa*** seleccionar ***Gestor  de Tarjetas..*** buscar ***ATTiny*** e instalar el paquete ***ATTiny by David A. Mellis[[1]](#1-programación-de-attiny84-42bots)***
-
-![Instalar ATTiny](https://github.com/JuliansCastro/Sistema-proteccion-incendios/blob/master/imgs/Gestor_Tarjetas_Attyny_David.png?raw=true "Instalar ATTiny")
-
-
-1. **Configurar el Arduino Uno para que actúe como programador de ATTiny**
-
-
-- Abra el boceto de ArduinoISP desde los Ejemplos ("Archivo" ->"Ejemplos" -> "Arduino ISP").
-- Seleccione la placa y el puerto serie que correspondan a su placa Arduino (por ejemplo, Arduino Uno).
-- Sube el boceto al Arduino Uno
-
-3. **Conecte el ATTiny84 al Arduino Uno**
-   
-   Revisar la hoja de [datos de ATTiny84](https://www.sigmaelectronica.net/manuals/ATTINY84A-PU.pdf). El ATtiny85 tiene 14 pines según el diagrama a continuación. El pin 1 del Attiny está marcado en el chip con un punto pequeño. Conecte el Attiny y el Arduino Uno según los diagramas a continuación:
-
-   ![Diagrama conexión Attiny84/44](https://42bots.com/wp-content/uploads/2014/01/programming-attiny44-attiny84-with-arduino-uno.png "Diagrama conexión Attiny84/44")
-
-   Conecte un condensador de 10 uF entre los pines "*RESET*" y "*GND*" en la placa Arduino Uno como se muestra en el diagrama. La franja blanca del condensador con el signo negativo ("-") va al pin *"GND"* de Arduino. Esto evita que el Arduino Uno se reinicie y asegura que el IDE de Arduino se comunique con el ArduinoISP (y no con el gestor de arranque) durante la carga de los bocetos en el Attiny.
-
-   Se debe tener en cuenta que la numeración de los pines de Attiny84/44 en la hoja de datos no coincide necesariamente con las asignaciones de Arduino. El pin 6 del Attiny84, por ejemplo, es en realidad el pin digital 7 de Arduino. A continuación se muestra el mapeo de pines de Attiny84/44 a Arduino:
-
-
-   ```
-   // ATMEL ATTINY84/44 - ARDUINO
-   //
-   //                           +-\/-+
-   //                     VCC  1|    |14  GND
-   //             (D 10)  PB0  2|    |13  AREF (D  0)
-   //             (D  9)  PB1  3|    |12  PA1  (D  1) 
-   //       RESET         PB3  4|    |11  PA2  (D  2) 
-   //  PWM  INT0  (D  8)  PB2  5|    |10  PA3  (D  3) 
-   //  PWM        (D  7)  PA7  6|    |9   PA4  (D  4)  SCK
-   //  PWM  MOSI  (D  6)  PA6  7|    |8   PA5  (D  5)  MISO  PWM
-   //                           +----+
-   ```
-
-4. **Prueba con el sketch de Blink y asegúrese de que todo funcione correctamente [[1]](#1-programación-de-attiny84-42bots)**
-
-![Sketch Blink](https://42bots.com/wp-content/uploads/2014/01/ATTiny84-Blink-Example.jpg "Sketch Blink")
-
-
-Cargar el sketch usando el comando *"Programa" > "Cargar usando programador" (Ctrl + Mayús + U)*:
-
-```arduino
-/*
-  Blink Attiny84/44
-  Turns on an LED on for one second, then off for one second, repeatedly.
- */
-
-int LED = 7; // LED connected to digital pin D7 (Attiny84/44 pin 6)
-
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED, OUTPUT);
-}
-
-// the loop function runs over and over again forever
-void loop() {
-  digitalWrite(LED, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);                       // wait for a second
-}
+```text
+┌─────────────────┐       LoRa 433MHz      ┌──────────────────────┐
+│   Nodo Sensor   │ ◄────────────────────► │  Estación Central    │
+│  (Tx - Pico)    │                        │  (Rx - Pico W)       │
+├─────────────────┤                        ├──────────────────────┤
+│ • DHT11         │                        │ • LoRa Receptor      │
+│ • PIR Sensor    │                        │ • WiFi Server        │
+│ • LoRa Tx       │                        │ • LCD Display        │
+│ • Raspberry     │                        │ • Raspberry Pi       │
+│   Pi Pico       │                        │   Pico W             │
+└─────────────────┘                        └──────────────────────┘
+                                                      │
+                                                      │ WiFi
+                                                      ▼
+                                           ┌──────────────────────┐
+                                           │   Cliente Web        │
+                                           │ (Navegador/App)      │
+                                           └──────────────────────┘
 ```
 
-Asegúrese de seleccionar la opción "ATTiny84 (reloj interno de 1 MHz)", o "ATTiny44 (reloj interno de 1 MHz)" en el menú *Herramientas > Placa* (dependiendo de la versión del chip que tenga). Tambien seleccione el programador ***"Arduino as ISP"*** en el menú *Herramientas > Programador*.:
+### Componentes del Sistema
 
-5. **Configura el ATTiny84 para que funcione a 8Mhz para una mejor compatibilidad con las bibliotecas de Arduino.**
+1. **Nodo Transmisor (Tx)**:
+   - Raspberry Pi Pico como microcontrolador principal
+   - Sensor DHT11 para temperatura y humedad
+   - Sensor PIR para detección de movimiento/llamas
+   - Módulo LoRa para transmisión de datos
+   - Encapsulado 3D impreso para protección ambiental
 
-Este paso es opcional. De forma predeterminada, los chips Attiny funcionan a 1 MHz. Necesita un paso adicional para configurar el microcontrolador para que funcione a 8 MHz. Este es un requisito para usar algunas bibliotecas populares de Arduino, así como para aprovechar al máximo su chip.
+2. **Estación Receptora (Rx)**:
+   - Raspberry Pi Pico W con conectividad WiFi
+   - Módulo LoRa para recepción de datos
+   - Display LCD I2C 16x2 para visualización local
+   - Servidor web HTTP integrado
+   - Procesamiento y almacenamiento temporal de datos
 
-Para hacerlo, debe usar el mismo cableado que usó para cargar el sketch de ***Blink*** en el paso anterior. En el menú *"Herramientas" > "Placa"*, esta vez seleccione la opción "ATtiny84 (reloj interno de 8 Mhz)", o "ATtiny44 (reloj interno de 8 Mhz)", dependiendo del chip que tenga. Es importante elegir la velocidad de reloj correcta en el menú. Elegir la opción de reloj externo de 20 Mhz, requerirá que agregue un cable en un cristal de 20 MHz, o resonador, para programar y usar su ATTiny84/44.
+3. **Protocolo de Comunicación**:
+   - LoRa a 433MHz para comunicación de largo alcance
+   - Estructura de paquetes con ID de nodo, datos de sensores y verificación
+   - Interfaz web HTTP para acceso remoto
 
-![Blink 8Mhz](https://github.com/JuliansCastro/Sistema-proteccion-incendios/blob/master/imgs/blink_8Mhz.png?raw=true "Sketch Blink 8Mhz")
+## Tecnologías Utilizadas
 
-A continuación, de nuevo en el menú ***"Herramientas"***, elija la opción ***"Quemar bootloader"***. En realidad, no hay bootloader en los chips Attiny, pero este paso establecerá los fusibles en los valores que le permitirán funcionar a 8 Mhz
+### Hardware
 
-Ignore cualquier error relacionado con las señales PAGEL y BS2 que pueda obtener. Para asegurarse de que el cambio funcionó, es posible que tenga que volver a cargar el sketch de Blink modificado del paso 4, esta vez utilizando la opción de reloj interno de 8 MHz para su chip desde el menú ***Boards > Clock***.
+- **Microcontroladores**:
+  - Raspberry Pi Pico (RP2040)
+  - Raspberry Pi Pico W (RP2040 + WiFi)
+- **Sensores**:
+  - DHT11 (Temperatura y Humedad)
+  - PIR Sensor (Detección de movimiento/llamas)
+- **Comunicación**:
+  - Módulos LoRa SX1276/SX1278 (433MHz)
+  - WiFi integrado (Pico W)
+- **Display**: LCD I2C 16x2 con controlador PCF8574
+- **PCB**: Diseño personalizado en KiCad
+- **Encapsulado**: Carcasas 3D impresas en PLA/PETG
 
+### Software
 
-## COMUNICACIÓN SERIAL ATTINY84/44 USANDO ARDUINO UNO DE INTERFAZ
+- **Lenguajes**: C++ (Arduino Framework)
+- **Librerías**:
+  - `LoRa.h` - Comunicación LoRa
+  - `DHT.h` - Sensor de temperatura/humedad
+  - `WiFi.h` - Conectividad inalámbrica
+  - `LiquidCrystal_I2C.h` - Control de display
+  - `TimeLib.h` - Manejo de tiempo
+- **Protocolos**: HTTP, LoRa, I2C, SPI
+- **IDE**: Arduino IDE con soporte para RP2040
+- **Herramientas de Diseño**:
+  - KiCad (Diseño de PCB)
+  - Fusion 360 (Modelado 3D)
 
-La biblioteca SoftwareSerial permite la comunicación en serie en otros pines digitales de una placa Arduino, utilizando software para replicar la funcionalidad (de ahí el nombre "SoftwareSerial"). Es posible tener múltiples puertos serie de software con velocidades de hasta 115200 bps (Tener en cuenta que existen [limitaciones](https://docs.arduino.cc/learn/built-in-libraries/software-serial#limitations-of-this-library)). Un parámetro habilita la señalización invertida para los dispositivos que requieren ese protocolo.
+## Instalación y Configuración
 
-La versión de SoftwareSerial incluida en la versión 1.0 y posteriores se basa en la [biblioteca NewSoftSerial](http://arduiniana.org/libraries/newsoftserial/) de 'Mikal Hart'[[3]](#3-softwareserial-library-docsarduinoccsoftware-serial).
+### Requisitos de Hardware
 
-Para usar esta biblioteca:
-```arduino
-#include <SoftwareSerial.h>
+- 2x Raspberry Pi Pico (1x estándar, 1x Pico W)
+- 2x Módulos LoRa SX1276/SX1278
+- 1x Sensor DHT11
+- 1x Sensor PIR
+- 1x Display LCD I2C 16x2
+- Componentes electrónicos (resistencias, capacitores, conectores)
+- PCBs personalizadas o protoboard
+- Carcasas 3D impresas
+- Fuentes de alimentación (baterías o adaptadores)
+
+### Montaje y Conexiones
+
+#### Nodo Transmisor (Pico)
+
+```text
+DHT11:
+- VCC → 3.3V
+- GND → GND  
+- DATA → GPIO 28
+
+PIR Sensor:
+- VCC → 5V
+- GND → GND
+- OUT → GPIO 27
+
+LoRa Module:
+- VCC → 3.3V
+- GND → GND
+- NSS → GPIO 8
+- RST → GPIO 9
+- DIO0 → GPIO 7
+- SCK → GPIO 18
+- MISO → GPIO 16
+- MOSI → GPIO 19
 ```
 
+#### Estación Receptora (Pico W)
 
-Pasos:
-1. Conectar el Attiny84/44 al Arduino Uno como se muestra en la imagen del [Paso 3](#programar-attiny-con-el-ide-de-arduino) de la programación de Attiny.
-2. Cargar el sketch de comunicación al Attiny de ejemplo usando el Arduino Uno como programador([Paso 4](#programación-de-attiny8444-con-arduino-uno)):
-   
-El sketch de comunicación serial de ejemplo:
-```arduino
-/*
- *  ATMEL ATTINY84/44 - ARDUINO
- *  
- *                             +-\/-+
- *                       VCC  1|    |14  GND
- *         Rx    (D 10)  PB0  2|    |13  AREF (D  0)
- *         Tx    (D  9)  PB1  3|    |12  PA1  (D  1) 
- *        (RESET)        PB3  4|    |11  PA2  (D  2) 
- *    PWM  INT0  (D  8)  PB2  5|    |10  PA3  (D  3) 
- *    PWM        (D  7)  PA7  6|    |9   PA4  (D  4)   SCK
- *    PWM (MOSI) (D  6)  PA6  7|    |8   PA5  (D  5)  (MISO)  PWM
- *
- */
+```text
+LoRa Module:
+- (Mismas conexiones que Tx)
 
-#include <SoftwareSerial.h>
-
-// Set up a new SoftwareSerial object with RX in digital pin 10 and TX in digital pin 11
-SoftwareSerial mySerial(10, 9); // RX, TX
-
-int analogValue = 30;
-
-void setup() {
-    // Set the baud rate for the SerialSoftware object
-    mySerial.begin(9600);
-}
-
-void loop() {
-    // Read the analog value on pin A0
-    //analogValue = analogRead(A0);
-
-    // Print analogValue in the Serial Monitor in many formats:
-    mySerial.print(analogValue);         // Print as an ASCII-encoded decimal
-    mySerial.print("\t");                // Print a tab character
-    mySerial.print(analogValue, DEC);    // Print as an ASCII-encoded decimal
-    mySerial.print("\t");                // Print a tab character
-    mySerial.print(analogValue, HEX);    // Print as an ASCII-encoded hexadecimal
-    mySerial.print("\t");                // Print a tab character
-    mySerial.print(analogValue, OCT);    // Print as an ASCII-encoded octal
-    mySerial.print("\t");                // Print a tab character
-    mySerial.print(analogValue, BIN);    // Print as an ASCII-encoded binary
-    mySerial.print("\t");                // Print a tab character    
-    mySerial.println();                  // Print a line feed character
-
-    // Pause for 10 milliseconds before the next reading
-    delay(100);
-}
+LCD I2C:
+- VCC → 3.3V
+- GND → GND
+- SDA → GPIO 0
+- SCL → GPIO 1
 ```
 
-4. En el Arduino Uno desconecte el capacitor del *RESET* y prográmelo con el sketch *BareMinumun*. Luego abra el ***Monitor Serie*** de esta instancia:
-   
-  ***Archivo > Ejemplos > 0.1Basics > BareMinumun***:
-```arduino
-void setup() {
-  // put your setup code here, to run once:
-}
+### Instalación del Entorno de Software
 
-void loop() {
-  // put your main code here, to run repeatedly:
-}
+1. **Configurar Arduino IDE**:
+
+```bash
+# Instalar Arduino IDE desde: https://www.arduino.cc/en/software
+
+# Agregar soporte para RP2040:
+# File → Preferences → Additional Board Manager URLs
+# Agregar: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+
+# Tools → Board → Boards Manager
+# Buscar "pico" e instalar "Raspberry Pi Pico/RP2040"
 ```
 
-![Monitor Serie](https://github.com/JuliansCastro/Sistema-proteccion-incendios/blob/master/imgs/BareMinimum.png?raw=true "Bare minimun > Monitor Serie")
+2. **Instalar Librerías Requeridas**:
 
-
-5. Conectar los cables de comunicación del el Attiny84/44 ***Rx:2 y Tx: 3 (Pines Arduino D10, D9)*** al Arduino Uno seleccionando los pines del Attiny84/44  para la comunicación serial. En el *Monitor Serie* se debe ver los datos transmitidos en la comunicación del Attiny84/44 al Arduino Uno:
-
-![CommSerialAttny_ArduinoUno]()
-![MonitorSerieAttny](https://github.com/JuliansCastro/Sistema-proteccion-incendios/blob/master/imgs/MonitorSerieAttiny84.png?raw=true "Monitor Serie Attiny84")
-
-## COMUNICACIÓN LoRa CON ATTINY84/44
-
-Basado en la modificación de la libreria de LoRa por ***[Geeky Electronics Projects](https://youtu.be/amkT5NtOgWc?si=71hFIrWzsCA1K3ym)*** [[4](#4-libreria-de-lora-attiny85-geeky-electronics-projects)].
-
-
-### Transmisor [[5](#5-interfacing-sx1278-ra-02-lora-module-with-arduino-howtoelectronics)]
-
-![Conexión Transmisor](https://how2electronics.com/wp-content/uploads/2019/12/Arduino-Lora-Transmitter-Circuit-768x420.jpg "Conexión Transmisor")
-
-```arduino
+```bash
+# En Arduino IDE: Tools → Manage Libraries
+# Instalar:
+- DHT sensor library by Adafruit
+- LoRa by Sandeep Mistry  
+- LiquidCrystal I2C by Frank de Brabander
+- Time by Michael Margolis
 ```
 
+3. **Configurar Red WiFi**:
 
-### Emisor [[5](#5-interfacing-sx1278-ra-02-lora-module-with-arduino-howtoelectronics)]
-
-```arduino
+```cpp
+// Editar en RPi_Pico_W_Lora_Rx.ino:
+#define SSID "TU_RED_WIFI"
+#define PASSWORD "TU_CONTRASEÑA"
 ```
 
+4. **Cargar Firmware**:
 
-
-## COMUNICACIÓN LoRa CON RPi Pico
-
-### Configuración del IDE Arduino para RPi Pico
-
-![Raspberry Pi pico - Pinout](https://www.okdo.com/wp-content/uploads/2021/04/Rasbnerry-Pi-Pico-Pinout-1.jpg?resize=2093%2C1667 "Raspberry Pi pico - Pinout")
-
-
-
-1. Instalar paquete de RPi Pico en el IDE de Arduino[[6]](#6-pico-w-with-the-arduino-ide-raspberry-pi-pico-w-and-adafruit-io-with-arduino-ide):
-
-   En el menu de ***Archivo > Preferencias > Gestor de URLs Adicionales de Tarjetas*** agregar el link:
-
-```
-https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
-```
-### Comunicación LoRa con RPi Pico [[7]](#7-raspberry-pi-pico-w-with-lora-sx1278-for-sensor-monitoring-electronic-clinic)
-
-![Raspberry Pi pico - LoRa Rx](https://www.electroniclinic.com/wp-content/uploads/2023/01/raspberry-pi-pico-w-with-i2c-16x2-lcd-receiver-1280x656.jpg "Raspberry Pi pico - LoRa Rx")
-
-```arduino
+```bash
+# 1. Conectar Raspberry Pi Pico manteniendo presionado BOOTSEL
+# 2. Seleccionar Board: "Raspberry Pi Pico" o "Raspberry Pi Pico W"
+# 3. Cargar RPi_Pico_Lora_Tx.ino en el nodo transmisor
+# 4. Cargar RPi_Pico_W_Lora_Rx.ino en la estación receptora
 ```
 
-### Webserver con RPi Pico
+## Despliegue
 
+### Ejecución Local
 
+1. **Inicializar Sistema**:
+   - Encender nodo transmisor (comenzará a enviar datos cada 20 segundos)
+   - Encender estación receptora
+   - Verificar conexión LoRa en monitor serial
+   - Confirmar conexión WiFi y obtener IP local
 
+2. **Acceso a Interface Web**:
+   - Conectarse a la misma red WiFi que el Pico W
+   - Abrir navegador en `http://[IP_DEL_PICO_W]`
+   - La página se actualiza automáticamente cada 5 segundos
 
+3. **Monitoreo Local**:
+   - Visualizar datos en tiempo real en LCD
+   - Revisar logs en monitor serial (115200 baud)
 
-</br></br></br></br>
+### Despliegue en Campo
 
-## REFERENCIAS:
+1. **Preparación**:
+   - Instalar nodos en ubicaciones estratégicas
+   - Configurar alimentación autónoma (paneles solares/baterías)
+   - Verificar cobertura LoRa entre nodos
 
-##### [1] Programación de ATtiny84 [(42bots)](https://42bots.com/tutorials/programming-attiny-ics-with-arduino-uno-and-the-arduino-ide-1-6-4-or-above/) 
+2. **Red WiFi de Campo**:
+   - Configurar hotspot móvil o router portable
+   - Ajustar configuración WiFi en código según disponibilidad
 
-##### [2] Programming ATtiny ICs with Arduino Uno and the Arduino IDE 1.6.4 or above [(42bots)](https://42bots.com/tutorials/programming-attiny-ics-with-arduino-uno-and-the-arduino-ide-1-6-4-or-above/)
+## Casos de Uso
 
-##### [3] SoftwareSerial Library [(docs.arduino.cc/software-serial)](https://docs.arduino.cc/learn/built-in-libraries/software-serial)
+### Monitoreo Forestal
 
-##### [4] libreria de LoRa Attiny85 [(Geeky Electronics Projects)](https://youtu.be/amkT5NtOgWc?si=71hFIrWzsCA1K3ym)
+```text
+Escenario: Bosque de 10 km²
+- 5 nodos transmisores distribuidos estratégicamente
+- 1 estación central con conectividad satelital/celular
+- Alertas automáticas cuando temperatura > 35°C y humedad < 30%
+- Detección temprana de focos de incendio mediante sensores PIR
+```
 
+### Instalaciones Industriales
 
-##### [5] Interfacing SX1278 (Ra-02) LORA Module with Arduino [(HowToElectronics)](https://how2electronics.com/interfacing-sx1278-lora-module-with-arduino/)
+```text
+Escenario: Almacén de materiales inflamables
+- Nodos en cada sector crítico
+- Integración con sistemas de extinción automática
+- Dashboard web para personal de seguridad
+- Registro histórico de condiciones ambientales
+```
 
-##### [6] Pico W with the Arduino IDE [(Raspberry Pi Pico W and Adafruit IO with Arduino IDE)](https://www.electroniclinic.com/raspberry-pi-pico-w-and-adafruit-io-with-arduino-ide/)
+### Agricultura de Precisión
 
-##### [7] Raspberry Pi Pico W with LoRa SX1278 for Sensor Monitoring [(Electronic Clinic)](https://www.electroniclinic.com/raspberry-pi-pico-w-with-lora-sx1278-for-sensor-monitoring/)
+```text
+Escenario: Invernaderos automatizados
+- Monitoreo continuo de microclima
+- Optimización de sistemas de riego
+- Prevención de condiciones de estrés térmico
+- Alertas de condiciones anómalas
+```
 
-##### [8] Webserver with Pico W on the Arduino IDE [(DroneBot Workshop)](https://dronebotworkshop.com/picow-arduino/)
+## Estructura del Proyecto
+
+```text
+Sistema-proteccion-incendios/
+├── README.md
+├── Carcasa - Fusion360/           # Modelos 3D de encapsulados
+│   ├── 3D/                        # Archivos STL para impresión
+│   └── Fusion360/                 # Archivos fuente F3D
+├── Diseño electrónico - PCB KiCad/ # Diseños de circuitos impresos
+│   ├── sys_incendios_rx/          # PCB para receptor
+│   ├── sys_incendios_Tx/          # PCB para transmisor
+│   └── Fab_PCB_diseno/            # Archivos Gerber para fabricación
+├── Software microcontroladores/    # Código fuente
+│   ├── RPi_Pico_Lora_Tx/         # Firmware nodo transmisor
+│   └── RPi_Pico_W_Lora_Rx/       # Firmware estación receptora
+├── Docs/                          # Documentación técnica
+│   ├── BOOM Materials.xlsx        # Lista de materiales
+│   └── Datasheets/                # Hojas de datos de componentes
+└── imgs/                          # Imágenes del proyecto
+```
+
+## Desarrollo Futuro
+
+- [ ] Integración con bases de datos (SQLite/MySQL)
+- [ ] API REST para integración con terceros
+- [ ] Aplicación móvil nativa
+- [ ] Protocolo MQTT para IoT
+- [ ] Integración con servicios en la nube (AWS IoT, Azure IoT)
+- [ ] Algoritmos de machine learning para predicción
+- [ ] Soporte para más tipos de sensores
+- [ ] Mesh networking con múltiples receptores
+
+## Contribuciones
+
+Las contribuciones son bienvenidas. Para cambios importantes:
+
+1. Fork el proyecto
+2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir un Pull Request
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
+
+## Créditos y Autores
+
+**Equipo de Desarrollo:**
+
+- **Julian A. Castro** - *Líder del proyecto* - [juacastropa@unal.edu.co](mailto:juacastropa@unal.edu.co)
+- **Daniela V. Amaya** - *Desarrollo de hardware*
+- **Sebastian A. Moreno** - *Desarrollo de software*
+- **Javier L. Rodríguez** - *Diseño mecánico*
+
+**Institución:** Universidad Nacional de Colombia  
+**Materia:** Diseño de Sistemas Electrónicos  
+**Año:** 2023
+
+---
+
+## Agradecimientos
+
+- Comunidad Arduino y Raspberry Pi Foundation
+- Desarrolladores de las librerías utilizadas
+- Universidad Nacional de Colombia por el apoyo académico
+
+---
+
+*Para soporte técnico o consultas, contactar al equipo de desarrollo a través de los emails proporcionados.*

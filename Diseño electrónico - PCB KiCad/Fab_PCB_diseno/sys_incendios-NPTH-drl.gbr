@@ -1,0 +1,32 @@
+%TF.GenerationSoftware,KiCad,Pcbnew,7.0.9*%
+%TF.CreationDate,2023-11-30T12:00:33-05:00*%
+%TF.ProjectId,sys_incendios,7379735f-696e-4636-956e-64696f732e6b,1.0*%
+%TF.SameCoordinates,Original*%
+%TF.FileFunction,NonPlated,1,2,NPTH,Drill*%
+%TF.FilePolarity,Positive*%
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 7.0.9) date 2023-11-30 12:00:33*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+%TA.AperFunction,ComponentDrill*%
+%ADD10C,1.500000*%
+%TD*%
+%TA.AperFunction,ComponentDrill*%
+%ADD11C,1.800000*%
+%TD*%
+G04 APERTURE END LIST*
+D10*
+%TO.C,U2*%
+X62820000Y-42895000D03*
+X62820000Y-133065000D03*
+X67670000Y-42895000D03*
+X67670000Y-133065000D03*
+D11*
+X62520000Y-39865000D03*
+X62520000Y-130035000D03*
+X67970000Y-39865000D03*
+X67970000Y-130035000D03*
+M02*
